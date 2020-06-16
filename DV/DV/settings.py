@@ -75,10 +75,16 @@ WSGI_APPLICATION = 'DV.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': os.environ.get('DJANGO_MYSQL_DATABASE') or 'dv',
+        'USER': os.environ.get('DJANGO_MYSQL_USER') or 'root',
+        'PASSWORD': os.environ.get('DJANGO_MYSQL_PASSWORD') or 'a.120544',
+        'HOST': os.environ.get('DJANGO_MYSQL_HOST') or '127.0.0.1',
+        'PORT': int(
+            os.environ.get('DJANGO_MYSQL_PORT') or 3306),
+        'OPTIONS': {
+            'charset': 'utf8mb4'},
+    }}
 
 
 # Password validation
